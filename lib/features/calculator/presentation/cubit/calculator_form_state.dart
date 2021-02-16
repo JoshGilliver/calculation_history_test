@@ -1,8 +1,8 @@
 part of 'calculator_form_cubit.dart';
 
 final Map<String, TextEditingController> defaultFormFields = {
-  'field_one': TextEditingController(text: '0.0'),
-  'field_two': TextEditingController(text: '0.0')
+  'field_one': TextEditingController(text: ''),
+  'field_two': TextEditingController(text: '')
 };
 
 abstract class CalculatorFormState extends Equatable {

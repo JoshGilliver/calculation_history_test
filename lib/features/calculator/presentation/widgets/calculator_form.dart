@@ -55,20 +55,29 @@ class _CalculatorFormState extends State<CalculatorForm>
                 child: Stack(
                   fit: StackFit.passthrough,
                   children: [
-                    ListView(
-                      children: [
-                        Container(
-                          height: height * 0.02,
-                        ),
-                        Container(width: width, child: _buildFormFields(state)),
-                        Container(
-                          height: height * 0.05,
-                        ),
-                        _buildCalculationResult(state),
-                        Container(
-                          height: height * 0.09,
-                        ),
-                      ],
+                    Positioned(
+                      bottom: 10,
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      child: ListView(
+                        children: [
+                          Container(
+                            height: height * 0.02,
+                          ),
+                          Container(
+                            width: width,
+                            child: _buildFormFields(state),
+                          ),
+                          Container(
+                            height: height * 0.05,
+                          ),
+                          _buildCalculationResult(state),
+                          Container(
+                            height: height * 0.09,
+                          ),
+                        ],
+                      ),
                     ),
                     Positioned(
                         bottom: 10,
@@ -124,13 +133,12 @@ class _CalculatorFormState extends State<CalculatorForm>
         key: ValueKey(entry.key),
         textAlign: TextAlign.center,
         decoration: InputDecoration(
-            contentPadding: const EdgeInsets.symmetric(horizontal: 20)),
+            contentPadding: const EdgeInsets.symmetric(horizontal: 30)),
         style: Theme.of(context)
             .textTheme
             .headline4
             .copyWith(color: Colors.black, fontWeight: FontWeight.w300),
         keyboardType: TextInputType.numberWithOptions(decimal: true),
-        textInputAction: TextInputAction.next,
         validator: (value) {
           if (value == null || value.isEmpty) {
             return "Value required";
@@ -145,10 +153,9 @@ class _CalculatorFormState extends State<CalculatorForm>
       ));
 
       if (i == (state.formFields.entries.length - 1)) {
-        children.add(buildAdaptiveFlexParent(context, [textField]));
+        children.add(textField);
       } else {
-        children.add(buildAdaptiveFlexParent(
-          context,
+        children.addAll(
           [
             textField,
             Container(
@@ -156,7 +163,7 @@ class _CalculatorFormState extends State<CalculatorForm>
                     top: 15, bottom: 10, left: 15, right: 15),
                 child: Icon(Icons.add))
           ],
-        ));
+        );
       }
     }
 
@@ -198,6 +205,7 @@ class _CalculatorFormState extends State<CalculatorForm>
 Widget buildAdaptiveFlexParent(BuildContext context, List<Widget> children) =>
     MediaQuery.of(context).orientation == Orientation.portrait
         ? Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: children,
           )
         : Row(
