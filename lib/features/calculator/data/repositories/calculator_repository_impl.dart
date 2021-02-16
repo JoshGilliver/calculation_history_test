@@ -1,4 +1,3 @@
-import '../../../../core/errors/exceptions.dart';
 import '../../../../core/utilities/with_cache_failure.dart';
 import 'package:dartz/dartz.dart';
 

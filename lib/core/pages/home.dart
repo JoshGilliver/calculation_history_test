@@ -30,27 +30,36 @@ class HomePage extends StatelessWidget {
   }
 
   PreferredSizeWidget _buildAppBar(BuildContext context) {
+    final title =
+        FittedBox(fit: BoxFit.scaleDown, child: Text('Calculate Values'));
     return Platform.isIOS
         ? CupertinoNavigationBar(
             leading: _buildSettingsIconButton(context),
+            middle: title,
             trailing: _buildCalculationHistoryIconButton(context))
         : AppBar(
-            elevation: 0,
-            backgroundColor: Colors.transparent,
+            title: title,
             leading: _buildSettingsIconButton(context),
+            centerTitle: true,
             actions: [_buildCalculationHistoryIconButton(context)],
           );
   }
 
-  Widget _buildCalculationHistoryIconButton(BuildContext context) => TextButton(
-        child: Text('Calculation history'),
-        onPressed: () => Navigator.of(context).pushNamed('/history'),
-      );
+  Widget _buildCalculationHistoryIconButton(BuildContext context) {
+    final _theme = Theme.of(context);
+    return TextButton(
+      child: Text(
+        'History',
+        style: _theme.textTheme.button
+            .copyWith(color: _theme.colorScheme.onPrimary),
+      ),
+      onPressed: () => Navigator.of(context).pushNamed('/history'),
+    );
+  }
 
   Widget _buildSettingsIconButton(BuildContext context) => IconButton(
         icon: Icon(
           Icons.settings,
-          color: Colors.black,
         ),
         onPressed: () => Navigator.of(context).pushNamed('/settings'),
       );
