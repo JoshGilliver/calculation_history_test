@@ -59,7 +59,7 @@ class CalculatorFormCubit extends Cubit<CalculatorFormState> {
 
   void saveFormState() {
     final formFields = this.state.formFields.map((key, value) =>
-        MapEntry<String, double>(key, double.tryParse(value.text) ?? 0.0));
+        MapEntry<String, double>(key, double.tryParse(value.text)));
 
     _saveCalculationFormState(formFields);
   }
